@@ -1,0 +1,20 @@
+<p-toast></p-toast>
+<div class="login-container">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="p-fluid">
+      <div class="p-float-label size">
+        <input id="userName" pInputText type="text" formControlName="userName" required />
+        <label for="userName">Username</label>
+      </div>
+      <div class="p-float-label size">
+        <p-password formControlName="password" required [toggleMask]="true" [feedback]="false"></p-password>
+        <label for="password">Password</label>
+      </div>
+      <button class="size" type="submit" [disabled]="!loginForm.valid">Login</button>
+      <div class="size">
+        <a pButtonLink [routerLink]="['/register']">Register account.</a>
+      </div>
+    </div>
+  </form>
+</div>

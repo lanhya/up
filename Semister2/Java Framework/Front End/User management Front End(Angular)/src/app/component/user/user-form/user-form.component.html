@@ -1,0 +1,130 @@
+<p-toast></p-toast>
+<div class="container mt-5 grid">
+  <div class="form col">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <h2 class="mb-4">Create User</h2>
+
+      <div class="formgrid grid">
+        <div class="field col">
+          <div class="p-fluid">
+            <div class="p-float-label size">
+              <input id="firstName" pInputText type="text" formControlName="firstName" required />
+              <label for="firstName">First Name</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="field col">
+          <div class="p-fluid">
+            <div class="p-float-label size">
+              <input id="lastName" pInputText type="text" formControlName="lastName" required />
+              <label for="lastName">Last Name</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formgrid grid">
+        <div class="field col">
+          <div class="p-fluid">
+            <div class="p-float-label size">
+              <input id="userName" pInputText type="text" formControlName="userName" required />
+              <label for="userName">Username</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="field col">
+          <div class="p-fluid">
+            <div class="p-float-label size">
+              <p-dropdown id="gender" [options]="genders" [showClear]="true" formControlName="gender"
+                optionLabel="label" optionValue="gender"></p-dropdown>
+              <label for="gender">Gender</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formgrid grid">
+        <div class="field col">
+          <div class="p-fluid">
+            <div class="p-float-label size">
+              <input id="phone" pInputText type="text" formControlName="phone" required />
+              <label for="phone">Phone</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="field col">
+          <div class="p-fluid">
+            <div class="p-float-label size">
+              <input id="email" pInputText type="text" formControlName="email" required />
+              <label for="email">Email</label>
+            </div>
+            <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="text-danger mt-1">
+              <div *ngIf="userForm.get('email')?.errors?.['required']">Email is required.</div>
+              <div *ngIf="userForm.get('email')?.errors?.['email']">Enter a valid email.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formgrid grid" *ngIf="!isEdit">
+        <div class="field col">
+          <div class="p-fluid">
+            <div class="p-float-label size">
+              <p-password formControlName="password" required [toggleMask]="true" [feedback]="false"></p-password>
+              <label for="password">Password</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formgrid grid">
+        <div class="field col">
+          <div class="p-fluid">
+            <div class="p-float-label size">
+              <input id="image" type="file" (change)="onFileSelected($event)" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex align-items-center justify-content-between">
+        <p-button label="Submit" type="submit" [disabled]="userForm.invalid"></p-button>
+        <a [routerLink]="['/dashboard/user']">
+          <i class="pi pi-arrow-left cursor-pointer" style="font-size: 1rem"></i>
+        </a>
+      </div>
+
+    </form>
+  </div>
+  <div class="image col">
+    <div class="card col">
+      <div class="formgrid grid">
+        <div class="field col">
+          <div class="p-fluid">
+            <div class="p-float-label size">
+              <ng-container *ngIf="imagePreview; else placeholder">
+                <!-- If imagePreview exists, display the image -->
+                <p-image [src]="imagePreview" alt="User Avatar" width="400" height="400" class="user-avatar border-round"
+                  [preview]="true">
+                </p-image>
+              </ng-container>
+              <!-- Placeholder Icon -->
+              <ng-template #placeholder>
+                <div class="placeholder-icon flex align-items-center justify-content-center">
+                  <i class="pi pi-spin pi-sun" style="font-size: 5rem; color: rgb(229, 218, 3);"></i>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Delete Button/Icon only if image is uploaded -->
+      <div class="flex align-items-center justify-content-center"  *ngIf="imagePreview">
+          <i class="pi pi-times cursor-pointer" style="color: red" (click)="onDeleteImage()"></i>
+      </div>
+    </div>
+  </div>
+</div>
