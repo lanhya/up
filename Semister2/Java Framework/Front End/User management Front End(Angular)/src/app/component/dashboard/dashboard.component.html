@@ -1,0 +1,27 @@
+<div class="card justify-content-center">
+  <div class="card custom-menu">
+    <p-menubar [model]="items">
+      <ng-template pTemplate="end">
+        <div class="grid align-items-center justify-content-center">
+          <div class="col">
+            <p>PHALLA LANH</p>
+          </div>
+          <div class="col mt-2">
+            <p-image src="../../../assets/images/phallalanh1.jpg" alt="Image" height="40"
+              [preview]="true"></p-image>
+          </div>
+          <div class="col mt-2">
+            <input type="text" pInputText placeholder="Search" class="w-full" />
+          </div>
+          <div class="col mt-2">
+            <i class="pi pi-ellipsis-v cursor-pointer" style="font-size: 1rem"></i>
+          </div>
+        </div>
+      </ng-template>
+    </p-menubar>
+  </div>
+
+  <div class="card">
+    <router-outlet></router-outlet>
+  </div>
+</div>
